@@ -44,9 +44,10 @@
                             <a href="{{route('mahasiswas-edit'`)}}"></a>
 
                             <form action="{{ route('mahasiswa-destroy', ['mahasiswa'=>$mahasiswa->id]) }}" method="POST">
-                            @method('DELETE')
-@cs
-                            <a href="/mahasiswas/{{$mahasiswa->id}}" class="btn btn-danger">Delete</a>
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                             </td>
                         </tr>
                         @empty
