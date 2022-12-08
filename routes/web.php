@@ -19,8 +19,6 @@ use Illuminate\Http\Request;
 Route::get('/', [MahasiswaController::class,'index'])->name('index');
 Route::get('/form', [MahasiswaController::class, 'form']);
 Route::post('/proses-form', [MahasiswaController::class, 'prosesForm']);
-Route::get('/mahasiswas/{mahasiswa}/edit', [MahasiswaController::class,'edit'])
-->name('mahasiswas-edit');
-Route::get('/mahasiswas/{mahasiswa}', [MahasiswaController::class,'destroy'])
-->name('mahasiswas-destroy');
-Route::get('/update', [MahasiswaController::class, 'update']);
+Route::get('/edit/{id}', [MahasiswaController::class, 'edit'])->name(('edit'));
+Route::post('/update/{id}', [MahasiswaController::class, 'update'])->name(('update'));
+Route::get('/delete/{id}', [MahasiswaController::class,'destroy'])->name('mahasiswas.destroy');

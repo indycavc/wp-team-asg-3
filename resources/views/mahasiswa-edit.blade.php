@@ -15,11 +15,18 @@
         <div class="col-md-8 col-xl-6">
             <h1>Edit Data Mahasiswa</h1>
             <hr>
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
 
-            <form action="{{ url('/update') }}" >
-            <input type="hidden" name="_token" value="">
+            <form action="/update/{{$mahasiswa->id}}" method="POST">
                 @csrf
-
                 <div class="form-group">
                     <label for="nama">Nama</label>
                     <input type="text" class="form-control" id="nama" name="nama">

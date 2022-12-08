@@ -25,7 +25,6 @@ class MahasiswaController extends Controller
             'alamat' => ''
         ]);
 
-
         $mahasiswa = new Mahasiswa();
         $mahasiswa->nim = $request->nim;
         $mahasiswa->nama = $request->nama;
@@ -33,9 +32,7 @@ class MahasiswaController extends Controller
         $mahasiswa->jurusan = $request->jurusan;
         $mahasiswa->alamat = $request->alamat;
         $mahasiswa->save();
-        // redirect('/');
-
-        dump($request);
+        return redirect()->route('index')->with('danger', "data invalid");
     }
 
     public function edit($id){
@@ -43,20 +40,21 @@ class MahasiswaController extends Controller
         return view('mahasiswa-edit', ['mahasiswa' => $mahasiswa]);
     }
 
-    public function update(Request $request, Mahasiswa $mahasiswa){
+    public function update(Request $request, $id){
         $validateData = $request->validate([
             'nama' => 'required|min:4|max:50',
             'jurusan' => 'required',
             'alamat' => ''
         ]);
 
-        Mahasiswa::where('id', $mahasiswa->id)->update($validateData);
-
-        return redirect()->route('index', ['mahasiswa'=>$mahasiswa->id])->with('pesan', "Update data {$validateData['nama']} berhasil");
+        $mahasiswa = Mahasiswa::find($id);
+        $mahasiswa->update($validateData);
+        return redirect()->route('index')->with('success', "Update data $mahasiswa->nama berhasil");
     }
 
     public function destroy($id){
-        Mahasiswa::destroy($id);
-        return redirect('/');
+        $data = Mahasiswa::find($id);
+        $data->delete();
+        return redirect()->route('index')->with('success',"Delete data $data->nama berhasil");
     }
 }

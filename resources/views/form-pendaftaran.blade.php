@@ -15,7 +15,15 @@
         <div class="col-md-8 col-xl-6">
             <h1>Pendaftaran Mahasiswa</h1>
             <hr>
-
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             <form action="{{ url('proses-form') }}" method="POST">
             <input type="hidden" name="_token" value="">
                 @csrf
@@ -23,12 +31,10 @@
                     <label for="nim">NIM</label>
                     <input type="text" class="form-control" id="nim" name="nim">
                 </div>
-
                 <div class="form-group">
                     <label for="nama">Nama</label>
                     <input type="text" class="form-control" id="nama" name="nama">
                 </div>
-
                 <div class="form-group">
                     <label>Jenis Kelamin</label>
                     <div>
@@ -44,7 +50,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="jurusan">Jurusan</label>
                     <select class="form-control" name="jurusan" id="jurusan">
@@ -55,15 +60,12 @@
                         <option value="Teknik Telekomunikasi">Teknik Telekomunikasi</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="alamat">Alamat</label>
                     <textarea class="form-control" id="alamat" rows="3" name="alamat"></textarea>
                 </div>
-
                 <button type="submit" class="btn btn-primary mb-2">Daftar</button>
             </form>
-
         </div>
     </div>
 </div>
